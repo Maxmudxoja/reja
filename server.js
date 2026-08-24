@@ -1,0 +1,36 @@
+console.log(`Web Serverni boshlash`);
+
+const express=require("express");
+const app =express();
+const http=require("http");
+
+// 1-> bosqich ->Kirish codelari
+// expressga kirib kelayotgan ma'lumotlarga oid boshqichlar yoziladi
+app.use(express.static("public")); // -> kirib kelayotgan requestlar uchun public folderi ochi deagn ma'noni anglatadi.
+app.use(express.json());//-> kirib kelayotgan json formatdagi datani objectga o'zhartirib beradi. Client va server ortasidagi data json korinishida boladi .
+app.use(express.urlencoded({extended: true}));// formdan kelgan requestlarni qabul qilish uchun 
+
+//2-bosqich Session boyicha bo'lim 
+
+//3-bosqich-> view backend yashash uchun , frontend yasaladi backendni ichida-> VIEWsgabog'liq codelar
+app.set("views", "views"); // folderlarni korsatyapmiz ,
+app.set("view engine", "ejs")// view engine bu ejs ekanligi korsatilyapdi
+
+//4-bosqich->Routing bog'liq codelar
+app.get("/", function(req,res){
+    res.end(`<h1>Hello World </h1>`);
+});
+
+// app.get("/hello", function(req,res){
+//     res.end(`<h1>Hello World </h1>`);
+// });
+
+// app.get("/gift", function(req,res){
+//     res.end(`<h1>Siz sovg'alar sahifasidasiz</h1>`);
+// });
+
+const server= http.createServer(app);
+let PORT=3000;
+server.listen(PORT, function(){
+    console.log(`The server is running successfully on port: ${PORT}`);
+}); 
