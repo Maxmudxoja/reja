@@ -16,7 +16,7 @@ fs.readFile(`database/user.json`, `utf8`, (err, data) => {
 
 // 1-> bosqich ->Kirish codelari
 // expressga kirib kelayotgan ma'lumotlarga oid boshqichlar yoziladi
-app.use("/public", express.static("public")); // -> kirib kelayotgan requestlar uchun public folderi ochi deagn ma'noni anglatadi.
+app.use("/public", express.static("public")); // -> kirib kelayotgan requestlar uchun public folderi ochiq deagn ma'noni anglatadi.
 app.use(express.json()); //-> kirib kelayotgan json formatdagi datani objectga o'zhartirib beradi. Client va server ortasidagi data json korinishida boladi .
 app.use(express.urlencoded({ extended: true })); // formdan kelgan requestlarni qabul qilish uchun
 
