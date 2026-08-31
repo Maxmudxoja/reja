@@ -1,15 +1,25 @@
 //MIT Task lar
-function countLetter(letter, word) {
-  let count = 0;
-  for (let i = 0; i < word.length; i++) {
-    if (word[i] === letter) {
-      count++;
-    }
-  }
-  return count;
-}
 
-console.log(countLetter("e", "engineer"));
+//Task B
+
+function countDigits(str) {
+  const digits = str.match(/[0-9]/g);
+  return digits ? digits.length : 0;
+}
+console.log(countDigits("ad2a54y79wet0sfgb9"));
+
+//Task A
+// function countLetter(letter, word) {
+//   let count = 0;
+//   for (let i = 0; i < word.length; i++) {
+//     if (word[i] === letter) {
+//       count++;
+//     }
+//   }
+//   return count;
+// }
+
+// console.log(countLetter("e", "engineer"));
 
 console.log("====================================");
 
