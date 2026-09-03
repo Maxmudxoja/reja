@@ -14,8 +14,8 @@ const fs = require("fs");
 // });
 
 // MongoDB chaqirish
-
 const db = require("./server").db();
+const mongoDB = require("mongodb");
 
 // 1-> bosqich ->Kirish codelari
 // expressga kirib kelayotgan ma'lumotlarga oid boshqichlar yoziladi
@@ -48,6 +48,16 @@ app.post(`/create-item`, (req, res) => {
     console.log(data.ops);
     res.json(data.ops[0]);
   });
+});
+
+app.post(`/delete-item`, (req, res) => {
+  const id = req.body.id;
+  db.collection(`plans`).deleteOne(
+    { _id: new mongoDB.ObjectId(id) },
+    function (err, data) {
+      res.json({ state: "success" });
+    },
+  );
 });
 
 // app.get(`/author`, (req, res) => {
