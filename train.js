@@ -1,5 +1,20 @@
 //MIT Task lar
 
+//Task C
+
+function checkContent(str1, str2) {
+  if (str1.length !== str2.length) {
+    return false;
+  }
+
+  const normalize = (str) => str.toLowerCase().split("").sort().join("");
+
+  return normalize(str1) === normalize(str2);
+}
+
+console.log(checkContent("mitgroup", "gmtiprou"));
+console.log(checkContent("hello", "world"));
+
 //Task B
 
 function countDigits(str) {
