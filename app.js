@@ -19,7 +19,7 @@ const db = require("./server").db();
 
 // 1-> bosqich ->Kirish codelari
 // expressga kirib kelayotgan ma'lumotlarga oid boshqichlar yoziladi
-app.use("/public", express.static("public")); // -> kirib kelayotgan requestlar uchun public folderi ochiq deagn ma'noni anglatadi.
+app.use(express.static("public")); // -> kirib kelayotgan requestlar uchun public folderi ochiq deagn ma'noni anglatadi.
 app.use(express.json()); //-> kirib kelayotgan json formatdagi datani objectga o'zhartirib beradi. Client va server ortasidagi data json korinishida boladi .
 app.use(express.urlencoded({ extended: true })); // formdan kelgan requestlarni qabul qilish uchun
 
@@ -45,12 +45,8 @@ app.post(`/create-item`, (req, res) => {
   console.log(req.body);
   const new_reja = req.body.reja;
   db.collection("plans").insertOne({ reja: new_reja }, (err, data) => {
-    if (err) {
-      console.log(err);
-      res.end("Something went wrong");
-    } else {
-      res.end("Sucessfully  added");
-    }
+    console.log(data.ops);
+    res.json(data.ops[0]);
   });
 });
 
