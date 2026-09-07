@@ -1,27 +1,70 @@
 //MIT Task lar
 
-//Task C
+//D
 
-function checkContent(str1, str2) {
-  if (str1.length !== str2.length) {
-    return false;
+// D-TASK
+
+// Shunday class tuzing tuzing nomi Shop, va uni constructoriga 3 hil mahsulot pass bolsin, hamda classning 3ta methodi bolsin, biri qoldiq, biri sotish va biri qabul. Har bir method ishga tushgan vaqt ham log qilinsin. MASALAN: const shop = new Shop(4, 5, 2); shop.qoldiq() return hozir 20:40da 4ta non, 5ta lagmon va 2ta cola mavjud! shop.sotish('non', 3) & shop.qabul('cola', 4) & shop.qoldiq() return hozir 20:50da 1ta non, 5ta lagmon va 6ta cola mavjud!
+
+class Shop {
+  constructor(non, lagmon, cola) {
+    this.non = non;
+    this.lagmon = lagmon;
+    this.cola = cola;
   }
 
-  const normalize = (str) => str.toLowerCase().split("").sort().join("");
+  vaqt() {
+    let d = new Date();
+    return d.getHours() + ":" + d.getMinutes();
+  }
 
-  return normalize(str1) === normalize(str2);
+  qoldiq() {
+    console.log(
+      `Hozir ${this.vaqt()}da ${this.non}ta non, ${this.lagmon}ta lagmon va ${this.cola}ta cola mavjud!`,
+    );
+  }
+
+  sotish(mahsulot, soni) {
+    this[mahsulot] -= soni;
+    console.log(`[${this.vaqt()}] Sotildi: ${soni}ta ${mahsulot}`);
+  }
+
+  qabul(mahsulot, soni) {
+    this[mahsulot] += soni;
+    console.log(`[${this.vaqt()}] Qabul qilindi: ${soni}ta ${mahsulot}`);
+  }
 }
 
-console.log(checkContent("mitgroup", "gmtiprou"));
-console.log(checkContent("hello", "world"));
+const shop = new Shop(4, 5, 2);
+shop.qoldiq();
 
-//Task B
+shop.sotish("non", 3);
+shop.qabul("cola", 4);
 
-function countDigits(str) {
-  const digits = str.match(/[0-9]/g);
-  return digits ? digits.length : 0;
-}
-console.log(countDigits("ad2a54y79wet0sfgb9"));
+shop.qoldiq();
+
+// //Task C
+
+// function checkContent(str1, str2) {
+//   if (str1.length !== str2.length) {
+//     return false;
+//   }
+
+//   const normalize = (str) => str.toLowerCase().split("").sort().join("");
+
+//   return normalize(str1) === normalize(str2);
+// }
+
+// console.log(checkContent("mitgroup", "gmtiprou"));
+// console.log(checkContent("hello", "world"));
+
+// //Task B
+
+// function countDigits(str) {
+//   const digits = str.match(/[0-9]/g);
+//   return digits ? digits.length : 0;
+// }
+// console.log(countDigits("ad2a54y79wet0sfgb9"));
 
 //Task A
 // function countLetter(letter, word) {
@@ -36,7 +79,7 @@ console.log(countDigits("ad2a54y79wet0sfgb9"));
 
 // console.log(countLetter("e", "engineer"));
 
-console.log("====================================");
+// console.log("====================================");
 
 // console.log("Jack Ma maslahatlari");
 // const list = [

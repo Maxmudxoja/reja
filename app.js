@@ -16,6 +16,7 @@ const fs = require("fs");
 // MongoDB chaqirish
 const db = require("./server").db();
 const mongoDB = require("mongodb");
+const { json } = require("stream/consumers");
 
 // 1-> bosqich ->Kirish codelari
 // expressga kirib kelayotgan ma'lumotlarga oid boshqichlar yoziladi
@@ -58,6 +59,28 @@ app.post(`/delete-item`, (req, res) => {
       res.json({ state: "success" });
     },
   );
+});
+
+app.post(`/edit-item`, (req, res) => {
+  const data = req.body;
+  console.log(data);
+  db.collection(`plans`).findOneAndUpdate(
+    {
+      _id: new mongoDB.ObjectId(data.id),
+    },
+    { $set: { reja: data.new_input } },
+    function (err, data) {
+      res.json({ state: `Success` });
+    },
+  );
+});
+
+app.post(`/delete-all`, (req, res) => {
+  if (req.body.delete_all) {
+    db.collection(`plans`).deleteMany(function () {
+      res.json({ state: `Hamma Rejalar o'chirildi` });
+    });
+  }
 });
 
 // app.get(`/author`, (req, res) => {
