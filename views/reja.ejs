@@ -10,53 +10,269 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
-  </head>
-  <body style="background-color: #b8bbd1">
-    <div class="container">
-      <h1 class="display-4 text-center py-1">REJA VA MAQSADLAR</h1>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@600;700&family=IBM+Plex+Mono:wght@500&family=Inter:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --mustard: #d9a441;
+        --teal: #1f5e5b;
+        --teal-soft: #dfebe9;
+        --cream: #f1e9d8;
+        --ink: #22201b;
+        --ink-soft: #78715c;
+      }
 
-      <div class="jumbotron p-3 shadow-sm">
-        <form id="create-form" action="/create-item" method="POST">
-          <div class="d-flex align-items-center">
-            <input
-              id="create-field"
-              name="reja"
-              autofocus
-              autocomplete="off"
-              class="form-control mr-3"
-              type="text"
-              style="flex: 1"
-            />
-            <button class="btn btn-primary" style="border-radius: 20px">
-              Yangi Reja Qo'shish
-            </button>
-          </div>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--cream);
+        font-family: "Inter", sans-serif;
+        color: var(--ink);
+      }
+
+      .page {
+        max-width: 640px;
+        margin: 0 auto;
+        padding: 50px 22px 90px;
+      }
+
+      .page-head {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .page-head h1 {
+        font-family: "Roboto Slab", serif;
+        font-weight: 700;
+        font-size: clamp(1.6rem, 5vw, 2.2rem);
+        letter-spacing: 0.01em;
+        margin: 0;
+        color: var(--teal);
+      }
+
+      .add-bar {
+        background: var(--teal);
+        border-radius: 10px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 34px;
+      }
+
+      #create-field {
+        flex: 1;
+        border: none;
+        outline: none;
+        background: #fff;
+        border-radius: 6px;
+        font-family: "Inter", sans-serif;
+        font-size: 0.95rem;
+        color: var(--ink);
+        padding: 12px 14px;
+      }
+
+      #create-field::placeholder {
+        color: var(--ink-soft);
+      }
+
+      .add-bar button {
+        border: none;
+        background: var(--mustard);
+        color: #2b1f04;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 500;
+        font-size: 0.8rem;
+        padding: 12px 18px;
+        border-radius: 6px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: filter 0.15s ease;
+      }
+
+      .add-bar button:hover {
+        filter: brightness(1.08);
+      }
+
+      .add-bar button:focus-visible,
+      #create-field:focus-visible {
+        outline: 2px solid var(--mustard);
+        outline-offset: 2px;
+      }
+
+      #item-list {
+        list-style: none;
+        margin: 0 0 30px;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      #item-list li {
+        display: flex;
+        align-items: stretch;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 1px 2px rgba(34, 32, 27, 0.08);
+      }
+
+      .item-text {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        font-size: 0.95rem;
+        line-height: 1.4;
+        padding: 16px 18px;
+        word-break: break-word;
+      }
+
+      #item-list li .actions {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        flex-shrink: 0;
+        padding: 10px 12px 10px 0;
+        position: relative;
+      }
+
+      #item-list li .actions::before {
+        content: "";
+        position: absolute;
+        left: -1px;
+        top: 8px;
+        bottom: 8px;
+        border-left: 2px dashed var(--teal-soft);
+      }
+
+      .edit-me,
+      .delete-me {
+        border: none;
+        background: transparent;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.72rem;
+        font-weight: 500;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.15s ease, color 0.15s ease;
+      }
+
+      .edit-me {
+        color: var(--teal);
+        margin-left: 10px;
+      }
+
+      .edit-me:hover {
+        background: var(--teal-soft);
+      }
+
+      .delete-me {
+        color: #a4482f;
+      }
+
+      .delete-me:hover {
+        background: #f5e2da;
+      }
+
+      .edit-me:focus-visible,
+      .delete-me:focus-visible {
+        outline: 2px solid var(--mustard);
+        outline-offset: 1px;
+      }
+
+      .page-foot {
+        text-align: center;
+      }
+
+      #clean-all {
+        border: none;
+        background: var(--ink);
+        color: var(--cream);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.75rem;
+        font-weight: 500;
+        padding: 12px 20px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.15s ease;
+      }
+
+      #clean-all:hover {
+        background: #a4482f;
+      }
+
+      #clean-all:focus-visible {
+        outline: 2px solid var(--mustard);
+        outline-offset: 2px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+
+      @media (max-width: 460px) {
+        #item-list li {
+          flex-direction: column;
+        }
+        #item-list li .actions {
+          padding: 0 12px 12px;
+        }
+        #item-list li .actions::before {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-head">
+        <h1>REJA VA MAQSADLAR</h1>
+      </div>
+
+      <div class="add-bar">
+        <form id="create-form" action="/create-item" method="POST" style="flex: 1; display: flex; gap: 10px;">
+          <input
+            id="create-field"
+            name="reja"
+            autofocus
+            autocomplete="off"
+            type="text"
+            placeholder="Yangi reja yozing..."
+          />
+          <button type="submit">Yangi Reja Qo'shish</button>
         </form>
       </div>
 
-     
-      <ul id="item-list" class="list-group pb-5">
-         <% items.map(function(item){ %>
-          <li
-          class="list-group-item list-group-item-info d-flex align-items-center justify-content-between"
-        >
-          <span class="item-text"><%= item.reja%></span>
-          <div>
-            <button  data-id="<%=item._id%>"  class="edit-me btn btn-secondary btn-sm mr-1">
-              O'zgartirish
-            </button>
-            <button data-id="<%= item._id %>"  class="delete-me btn btn-danger btn-sm">O'chirish</button>
+      <ul id="item-list">
+        <% items.map(function(item){ %>
+        <li>
+          <span class="item-text"><%= item.reja %></span>
+          <div class="actions">
+            <button data-id="<%= item._id %>" class="edit-me">O'zgartirish</button>
+            <button data-id="<%= item._id %>" class="delete-me">O'chirish</button>
           </div>
         </li>
-         <% }) %>
-        
+        <% }) %>
       </ul>
 
-      <button id="clean-all" class="btn btn-danger" style="border-radius: 20px">
-        Hamma Rejalarni o'chirish
-      </button>
+      <div class="page-foot">
+        <button id="clean-all">Hamma Rejalarni o'chirish</button>
+      </div>
     </div>
+
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/browser.js"> </script>
+    <script src="/browser.js"></script>
   </body>
 </html>

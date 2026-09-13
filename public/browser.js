@@ -68,7 +68,7 @@ document.addEventListener(`click`, function (e) {
           ).innerHTML = userInput;
         })
         .catch((err) => {
-          onsole.log("Iltimos qaytadan harakat qiling");
+          console.log("Iltimos qaytadan harakat qiling");
         });
     }
   }
