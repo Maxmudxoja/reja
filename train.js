@@ -1,11 +1,27 @@
 //MIT Task lar
 
-//E-Task
-function getReverse(str) {
-  return str.split("").reverse().join("");
-}
+//Task -G
 
-console.log(getReverse("hello"));
+// function getHighestIndex(arr) {
+//   let maxIndex = 0;
+
+//   for (let i = 1; i < arr.length; i++) {
+//     if (arr[i] > arr[maxIndex]) {
+//       maxIndex = i;
+//     }
+//   }
+
+//   return maxIndex;
+// }
+
+// console.log(getHighestIndex([5, 21, 12, 21, 8]));
+
+// //E-Task
+// function getReverse(str) {
+//   return str.split("").reverse().join("");
+// }
+
+// console.log(getReverse("hello"));
 
 // D-TASK
 
